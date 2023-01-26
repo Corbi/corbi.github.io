@@ -8,24 +8,35 @@
 		<div id="content">
 			<div id="marcador">
 				<p>Hits: <span id="hits">0</span></p>
-				<p>Misses: <span id="misses">0</span></p>
+				<p>Left: <span id="misses">3</span></p>
 			</div>
 			<br>
 			<canvas id="canvas" width="512" height="512"></canvas>
 			<br>
 			<div id="botones">
-				<button class="button" id="human-button">Real</button>
-				<button class="button" id="ia-button">AI</button>
+				<button disabled class="button" id="human-button">Real</button>
+				<button disabled class="button" id="ia-button">AI</button>
 			</div>
 			
 			<div id="overlay">
 				<div>
 					<div id="marcador">
 						<p>Hits: <span id="hits2">0</span></p>
-						<p>Misses: <span id="misses2">0</span></p>
+						<p>Left: <span id="misses2">3</span></p>
 					</div>
 					<p class="emoji-big" id="thumbUp">&#x1F44D;</p>
 					<p class="emoji-big" id="thumbDown">&#x1F44E;</p>
+				</div>
+			</div>
+			
+			<div id="overlayResultado">
+				<div>
+					<div id="resultado">
+						<p>Your result: <span id="record">0</span></p>
+						<br>
+						<button class="button" id="myButton">Share on Twitter</button>
+					</div>
+					<button class="button" id="buttonReiniciar">Play again</button>
 				</div>
 			</div>
 			

@@ -29,6 +29,9 @@ var words = ["dog", "cat", "cow", "horse", "pig", "sheep", "goat", "chicken", "d
     "fairground", "market", "mall", "shopping center", "grocery store", "convenience store", "department store", "boutique", "bakery", "cafe",
     "restaurant", "bar", "nightclub", "casino", "gas station", "car rental", "car repair", "car wash", "bank", "post office",
     "school", "university", "college", "hospital", "clinic", "dentist", "pharmacy", "gym"];
+	
+	
+var tipos =	["painting", "draw", "illustration", "cgi", "3d", "shape", "colors", "anime", "cartoon", "photo", ""];
 var selectedFunction;
 
 const MIN_DATE = "2015-01-01";
@@ -49,11 +52,14 @@ var misses2 = document.getElementById("misses2");
 var thumbUp = document.getElementById("thumbUp");
 var thumbDown = document.getElementById("thumbDown");
 
+var record = document.getElementById("record");
+
 var hitCounter = 0;
-var missCounter = 0;
+var missCounter = 3;
 
 var correctAudio = new Audio("https://opengameart.org/sites/default/files/bell.wav");
 var incorrectAudio = new Audio("https://opengameart.org/sites/default/files/error_0.ogg");
+var endAudio = new Audio("https://opengameart.org/sites/default/files/Win%20sound.wav");
 
 // Agrega un evento al botón "Human"
 humanButton.addEventListener("click", function() {
@@ -62,9 +68,10 @@ humanButton.addEventListener("click", function() {
 		incorrectAudio.play();
 		thumbDown.style.display = "block";
 		thumbUp.style.display = "none";
-		missCounter++;
+		missCounter--;
 		misses.innerHTML = missCounter;
 		misses2.innerHTML = missCounter;
+		comprobarPerder();
 	}else{
 		correctAudio.play();
 		thumbUp.style.display = "block";
@@ -89,9 +96,10 @@ iaButton.addEventListener("click", function() {
 		incorrectAudio.play();
 		thumbDown.style.display = "block";
 		thumbUp.style.display = "none";
-		missCounter++;
+		missCounter--;
 		misses.innerHTML = missCounter;
 		misses2.innerHTML = missCounter;
+		comprobarPerder();
 	}
 	setTimeout(loadRandomImage, 200);
 });
@@ -104,8 +112,7 @@ function getRandomWord(){
 //Función para realizar la llamada a la API y cargar la imagen en el canvas
 async function loadImageToCanvasFake(){
 	var images = [];
-	 var randomWord = words[Math.floor(Math.random() * words.length)];
-	var urlVerdadera = "https://source.unsplash.com/512x512/?" + randomWord;
+	var urlVerdadera = obtenerImagenReal();
     try {
       let response = await fetch('https://lexica.art/api/v1/search?q='+urlVerdadera);
       let data = await response.json();
@@ -115,20 +122,22 @@ async function loadImageToCanvasFake(){
       console.log(error);
 	  setTimeout(loadRandomImage, 3000);
     }
-  var imgSrc = images[0].src;
-  var img = new Image();
-  img.src = imgSrc;
-  img.onload = function(){
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-  }
+	
+	var numeroImg = Math.floor(Math.random() * 5);
+	var imgSrc = images[numeroImg].src;
+	var img = new Image();
+	img.src = imgSrc;
+	img.onload = function(){
+		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+		humanButton.disabled = false;
+		iaButton.disabled = false;
+	}
 }
 
 function loadImageToCanvasReal() {
-  // Obtener una palabra aleatoria de la lista de palabras
-  var randomWord = words[Math.floor(Math.random() * words.length)];
-  
+ 
   // Crear la URL de la imagen utilizando la palabra aleatoria
-  var imgUrl = "https://source.unsplash.com/512x512/?" + randomWord;
+  var imgUrl = obtenerImagenReal();
   
   // Crear una nueva imagen y establecer su src con la URL de la imagen
   var img = new Image();
@@ -137,7 +146,18 @@ function loadImageToCanvasReal() {
   // Esperar a que la imagen se cargue antes de dibujarla en el canvas
   img.onload = function() {
     ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+	humanButton.disabled = false;
+	iaButton.disabled = false;
   }
+}
+
+function obtenerImagenReal(){
+	// Obtener una palabra aleatoria de la lista de palabras
+  var randomWord = words[Math.floor(Math.random() * words.length)];
+  var randomTipo = tipos[Math.floor(Math.random() * tipos.length)];
+  
+  // Crear la URL de la imagen utilizando la palabra aleatoria
+  return "https://source.unsplash.com/512x512/?" + randomWord + " " + randomTipo;
 }
 
 function getRandomDate() {
@@ -161,6 +181,9 @@ function loadRandomImage() {
 
 function showOverlay() {
 	
+	humanButton.disabled = true;
+	iaButton.disabled = true;
+	
   var overlay = document.getElementById("overlay");
   overlay.style.top = "0";
   setTimeout(function(){ 
@@ -169,12 +192,30 @@ function showOverlay() {
 }
 
 function clearCanvas(){
+
 	ctx.clearRect(0, 0, canvas.width, canvas.height);
 	ctx.font = "30px Arial";
 	ctx.fillStyle = "black";
 	ctx.textAlign = "center";
 	ctx.fillText("Loading...", canvas.width/2, canvas.height/2);
 }
+
+document.getElementById("myButton").addEventListener("click", function(){
+    window.open('https://twitter.com/intent/tweet?text=I%20got%20a%20result%20of%20'+hitCounter+'%20hits%20on%20Real%20or%20AI:%20https://corbi.github.io/juegos/realorai.html')
+});
+
+function comprobarPerder(){
+	if(missCounter <= 0){
+		endAudio.play();
+		var overlay = document.getElementById("overlayResultado");
+		record.innerHTML = hitCounter;
+		overlay.style.top = "0";
+	}
+}
+
+document.getElementById("buttonReiniciar").addEventListener("click", function(){
+    location.reload();
+});
 
 //Carga la función al cargar la página
 window.onload = loadRandomImage();
