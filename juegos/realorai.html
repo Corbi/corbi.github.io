@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+		<div id="content">
+			<div id="marcador">
+				<p>Aciertos: <span id="hits">0</span></p>
+				<p>Fallos: <span id="misses">0</span></p>
+			</div>
+			<br>
+			<canvas id="canvas" width="512" height="512"></canvas>
+			<br>
+			<div id="botones">
+				<button class="button" id="human-button">Real</button>
+				<button class="button" id="ia-button">AI</button>
+			</div>
+			
+			<div id="overlay">
+				<div>
+					<div id="marcador">
+						<p>Aciertos: <span id="hits2">0</span></p>
+						<p>Fallos: <span id="misses2">0</span></p>
+					</div>
+					<p class="emoji-big" id="thumbUp">&#x1F44D;</p>
+					<p class="emoji-big" id="thumbDown">&#x1F44E;</p>
+				</div>
+			</div>
+		</div>
+    <script src="script.js"></script>
+  </body>
+</html>
