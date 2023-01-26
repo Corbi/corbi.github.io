@@ -1,0 +1,20 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 90vh;
+  font-size: 1.5em;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a {
+  margin: 0 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  width: 180px;
+  margin-bottom:10px;
+}
