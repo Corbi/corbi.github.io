@@ -150,7 +150,7 @@ function loadImageToCanvasReal() {
 	iaButton.disabled = false;
   }
 }
-
+/*
 function obtenerImagenReal(){
 	// Obtener una palabra aleatoria de la lista de palabras
   var randomWord = words[Math.floor(Math.random() * words.length)];
@@ -158,6 +158,44 @@ function obtenerImagenReal(){
   
   // Crear la URL de la imagen utilizando la palabra aleatoria
   return "https://source.unsplash.com/512x512/?" + randomWord + " " + randomTipo;
+}
+*/
+
+function obtenerImagenReal(){
+    // Obtener una palabra aleatoria de la lista de palabras
+  var randomWord = words[Math.floor(Math.random() * words.length)];
+  var randomTipo = tipos[Math.floor(Math.random() * tipos.length)];
+  
+  // Crear la URL de la imagen utilizando la palabra aleatoria
+
+    var imageUrl = "https://picsum.photos/512?random=" + Math.random() * Math.random() * Math.random();
+
+    // Llama a getImageUrl y devuelve la Promesa
+    return new Promise((resolve, reject) => {
+        getImageUrl(imageUrl)
+            .then(imageUrl => {
+                resolve(imageUrl);
+            })
+            .catch(error => {
+                reject(error);
+            });
+    });
+}
+
+async function getImageUrl() {
+    try {
+        // Realiza la solicitud a la URL de Picsum Photos
+        let response = await fetch('https://picsum.photos/200/300');
+        
+        // La URL final de la imagen redirigida se encuentra en response.url
+        let imageUrl = response.url;
+
+        console.log('Image URL:', imageUrl);
+
+        return imageUrl;
+    } catch (error) {
+        console.error('Error fetching the image URL:', error);
+    }
 }
 
 function getRandomDate() {
