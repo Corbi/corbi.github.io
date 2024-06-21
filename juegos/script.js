@@ -185,7 +185,7 @@ function obtenerImagenReal(){
 async function getImageUrl() {
     try {
         // Realiza la solicitud a la URL de Picsum Photos
-        let response = await fetch('https://picsum.photos/200/300');
+        let response = await fetch('https://picsum.photos/512/512');
         
         // La URL final de la imagen redirigida se encuentra en response.url
         let imageUrl = response.url;
