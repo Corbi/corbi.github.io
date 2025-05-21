@@ -1,5 +1,18 @@
+// Función para establecer el valor de la variable CSS --hue desde el radio seleccionado
+function setHueFromCheckedRadio() {
+  const checked = document.querySelector('input[type=radio]:checked');
+  if (checked) {
+    const hue = checked.getAttribute('data-hue');
+    document.documentElement.style.setProperty('--hue', hue);
+  }
+}
+
+// Al iniciar la página, pon el filtro correcto
+setHueFromCheckedRadio();
+
 // Inicia la cámara al hacer clic en el botón
 document.querySelector('button').addEventListener('click', function () {
+  setHueFromCheckedRadio(); // <-- Añade esto aquí también
   navigator.mediaDevices.getUserMedia({
     audio: false,
     video: {
