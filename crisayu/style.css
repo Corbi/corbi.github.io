@@ -44,13 +44,14 @@ main input {
 }
 
 main label {
-  --hue-label: 0; /* Rojo por defecto */
+  --hue-label: 0;
   display: flex;
   flex: 1;
   justify-content: center;
+  align-items: center; /* Añade esto */
   background: hsl(var(--hue-label, 0), 100%, 50%);
-  font-size: 0;
-  line-height: 0;
+  font-size: 1.6rem;   /* Cambia a un valor visible */
+  line-height: 1;      /* Cambia a un valor visible */
   border-radius: 50%;
   border: 0.4rem solid rgba(0, 0, 0, 0.5);
   transform: scale(0.667);
