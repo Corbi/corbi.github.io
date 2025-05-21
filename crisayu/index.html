@@ -1,28 +1,10 @@
 <!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
-  
-    <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
-
-    <meta name="apple-mobile-web-app-title" content="CodePen">
-
-    <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-
-    <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
-
-
-
-  
-    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-
-
+  <link rel="icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
   <title>Reveal Lens</title>
-
-    <link rel="canonical" href="https://codepen.io/Vicente-Corb-/pen/dPPxvNQ">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://public.codepenassets.com/css/reset-2.0.min.css">
-
-  
   
 <style>
 video {
@@ -36,7 +18,7 @@ aside {
   right: 0;
   bottom: 0;
   left: 0;
-  background: hsla(var(--hue, 0),100%,50%,1);
+  background: hsl(0, 100%, 50%);
   mix-blend-mode: multiply;
 }
 
@@ -61,15 +43,11 @@ main li {
   display: flex;
   justify-content: stretch;
 }
-main input {
-  position: absolute;
-  top: -100%;
-}
-main label {
+
+.color-button {
   display: flex;
   flex: 1;
   justify-content: center;
-  background: hsl(var(--hue-label, 0),100%,50%);
   font-size: 0;
   line-height: 0;
   border-radius: 50%;
@@ -79,20 +57,26 @@ main label {
   transition: transform 175ms ease-in-out,
     opacity 175ms ease-in-out;
   opacity: 0;
-}
-.streaming main label {
-  opacity: 1;
-}
-
-#green + label {
-  --hue-label: 120;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  padding: 0;
+  appearance: none;
 }
 
-#blue + label {
-  --hue-label: 240;
+#red {
+  background: hsl(0, 100%, 50%);
 }
 
-input:checked + label {
+#green {
+  background: hsl(120, 100%, 50%);
+}
+
+#blue {
+  background: hsl(240, 100%, 50%);
+}
+
+.color-button.selected {
   border-color: rgba(255,255,255,.8);
   transform: scale(1);
 }
@@ -111,95 +95,66 @@ body {
   box-sizing: border-box;
 }
 
-button {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border: 0;
-  border-radius: 50%;
-  width: 7.5rem;
-  height: 7.5rem;
-  transition: 175ms opacity;
-  font-size: 1.6rem;
-}
 .streaming li:first-of-type {
   display: none;
 }
 
-section {
-  //filter: brightness(200%) saturate(50%)
+.streaming main .color-button {
+  opacity: 1;
 }
 </style>
-
-  <script>
-  window.console = window.console || function(t) {};
-</script>
-
-  
-  
 </head>
 
 <body translate="no">
   <section>
-<video playsinline=""></video>
-<aside></aside>
-</section>
-<main>
-  <ul>
-    <li>
-      <button>Start</button>
-    </li>
-    <li>
-      <input type="radio" name="color" id="red" data-hue="0" checked="">
-      <label for="red">Red</label>
-    </li>
-    <li>
-      <input type="radio" name="color" id="green" data-hue="120">
-      <label for="green">Green</label>
-    </li>
-    <li>
-      <input type="radio" name="color" id="blue" data-hue="240">
-      <label for="blue">Blue</label>
-    </li>
-  </ul>
-</main>
-  
-      <script id="rendered-js">
-document.querySelector('button').addEventListener('click', function (e) {
-  navigator.mediaDevices.getUserMedia({
-    audio: false,
-    video: {
-      facingMode: 'environment' } }).
+    <video playsinline=""></video>
+    <aside></aside>
+  </section>
+  <main>
+    <ul>
+      <li>
+        <button id="start">Start</button>
+      </li>
+      <li>
+        <button class="color-button selected" id="red" onclick="setHue(0, this)"></button>
+      </li>
+      <li>
+        <button class="color-button" id="green" onclick="setHue(120, this)"></button>
+      </li>
+      <li>
+        <button class="color-button" id="blue" onclick="setHue(240, this)"></button>
+      </li>
+    </ul>
+  </main>
 
-  then(stream => {
-    debugger;
-    var video = document.querySelector('video');
-    video.srcObject = stream;
-    video.onloadedmetadata = function (e) {
-      video.play();
-    };
-    document.documentElement.classList.add('streaming');
-  }).catch(err => {
-    console.log('error', err);
-  });
-});
+  <script>
+    // Función para cambiar el color
+    function setHue(hue, element) {
+      document.querySelector('aside').style.background = `hsl(${hue}, 100%, 50%)`;
+      document.querySelectorAll('.color-button').forEach(btn => btn.classList.remove('selected'));
+      element.classList.add('selected');
+    }
 
-document.querySelector('aside').addEventListener('touchstart', e => {
-  e.preventDefault();
-});
+    // Control de la cámara
+    document.getElementById('start').addEventListener('click', function(e) {
+      navigator.mediaDevices.getUserMedia({
+        audio: false,
+        video: { facingMode: 'environment' }
+      }).then(stream => {
+        const video = document.querySelector('video');
+        video.srcObject = stream;
+        video.onloadedmetadata = () => video.play();
+        document.documentElement.classList.add('streaming');
+      }).catch(err => {
+        console.log('error', err);
+      });
+    });
 
-const options = Array.from(document.querySelectorAll('input[type=radio]'));
-
-options.forEach(option => {
-  option.addEventListener('click', e => {
-    document.documentElement.style.setProperty('--hue', e.currentTarget.getAttribute('data-hue'));
-  });
-});
-//# sourceURL=pen.js
-    </script>
-
-  
-
-
-
+    // Prevenir touchstart en el overlay
+    document.querySelector('aside').addEventListener('touchstart', e => {
+      e.preventDefault();
+    });
+  </script>
 </body>
+</html>
+</html>
