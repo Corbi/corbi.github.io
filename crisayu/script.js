@@ -49,6 +49,7 @@ options.forEach(option => {
     const hue = e.currentTarget.getAttribute('data-hue');
     if (hue) {
       document.documentElement.style.setProperty('--hue', hue);
+      console.log('Cambiando --hue a', hue); // <-- Añade esto
     }
   });
 });
