@@ -62,6 +62,16 @@ main label {
   opacity: 0;
 }
 
+main label[for="red"] {
+  --hue-label: 0;
+}
+main label[for="green"] {
+  --hue-label: 120;
+}
+main label[for="blue"] {
+  --hue-label: 240;
+}
+
 .streaming main label {
   opacity: 1;
 }
