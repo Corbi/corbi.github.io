@@ -1,33 +1,38 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Colorines</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<section>
-<video playsinline></video>
-<aside></aside>
-</section>
-<main>
-  <ul>
-    <li>
-      <button>Start</button>
-    </li>
-    <li>
-      <input type="radio" name="color" id="red" data-hue="0" checked onclick="cambiarHue(0)>
-      <label for="red">Rojo</label>
-    </li>
-    <li>
-      <input type="radio" name="color" id="green" data-hue="120" onclick="cambiarHue(120)>
-      <label for="green">Verde</label>
-    </li>
-    <li>
-      <input type="radio" name="color" id="blue" data-hue="240" onclick="cambiarHue(240)>
-      <label for="blue">Azul</label>
-    </li>
-  </ul>
-</main>
- <script src="script.js"></script> 
+
+  <section>
+    <video playsinline></video>
+    <aside></aside>
+  </section>
+
+  <main>
+    <ul>
+      <li>
+        <button>Start</button>
+      </li>
+      <li>
+        <input type="radio" name="color" id="red" data-hue="0" checked>
+        <label for="red">Rojo</label>
+      </li>
+      <li>
+        <input type="radio" name="color" id="green" data-hue="120">
+        <label for="green">Verde</label>
+      </li>
+      <li>
+        <input type="radio" name="color" id="blue" data-hue="240">
+        <label for="blue">Azul</label>
+      </li>
+    </ul>
+  </main>
+
+  <script src="script.js"></script> 
 </body>
 </html>

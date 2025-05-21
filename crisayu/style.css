@@ -9,50 +9,57 @@ aside {
   right: 0;
   bottom: 0;
   left: 0;
-  background: hsla(var(--hue, 0),100%,50%,1);
+  background: hsla(var(--hue, 0), 100%, 50%, 1);
   mix-blend-mode: multiply;
 }
 
 main {
   position: absolute;
   top: 1rem;
-  left:  1em;
+  left: 1em;
   right: 1em;
 }
+
 main ul {
   display: flex;
   justify-content: space-around;
 }
+
 @media all and (orientation: landscape) {
   main ul {
     flex-direction: column;
   }
 }
+
 main li {
   width: 7.5rem;
   height: 7.5rem;
   display: flex;
   justify-content: stretch;
 }
+
 main input {
   position: absolute;
   top: -100%;
 }
+
 main label {
   display: flex;
   flex: 1;
   justify-content: center;
-  background: hsl(var(--hue-label, 0),100%,50%);
+  background: hsl(var(--hue-label, 0), 100%, 50%);
   font-size: 0;
   line-height: 0;
   border-radius: 50%;
-  border: .4rem solid rgba(0,0,0,.5);
-  transform: scale(.667);
+  border: 0.4rem solid rgba(0, 0, 0, 0.5);
+  transform: scale(0.667);
   transform-origin: center center;
-  transition: transform 175ms ease-in-out,
+  transition:
+    transform 175ms ease-in-out,
     opacity 175ms ease-in-out;
   opacity: 0;
 }
+
 .streaming main label {
   opacity: 1;
 }
@@ -65,14 +72,17 @@ main label {
   --hue-label: 240;
 }
 
+/* Red (default) handled by default value in --hue-label (0) */
+
 input:checked + label {
-  border-color: rgba(255,255,255,.8);
+  border-color: rgba(255, 255, 255, 0.8);
   transform: scale(1);
 }
 
 html {
   font-size: 62.5%;
 }
+
 body {
   height: 100vh;
   display: flex;
@@ -80,6 +90,7 @@ body {
   align-items: center;
   overflow: hidden;
 }
+
 *, *::before, *::after {
   box-sizing: border-box;
 }
@@ -93,18 +104,12 @@ button {
   transition: 175ms opacity;
   font-size: 1.6rem;
 }
+
 .streaming li:first-of-type {
   display: none;
 }
 
 section {
-  filter: brightness(200%) saturate(50%)
-}
-
-video {
-    position: fixed; right: 0; bottom: 0;
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto; z-index: -100;
-    background: url(polina.jpg) no-repeat;
-    background-size: cover;
+  /* Si quieres aplicar un filtro, descomenta esta línea */
+  /* filter: brightness(200%) saturate(50%); */
 }
