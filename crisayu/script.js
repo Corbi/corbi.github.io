@@ -28,3 +28,7 @@ options.forEach(option => {
     document.documentElement.style.setProperty('--hue', e.currentTarget.getAttribute('data-hue'))
   })
 })
+
+function cambiarHue(var hue){
+	document.documentElement.style.setProperty('--hue', hue);
+}
