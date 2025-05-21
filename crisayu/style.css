@@ -3,19 +3,22 @@
 }
 
 video {
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: 1;
-  max-height: 100vh;
-  max-width: 100vw;
+  object-fit: cover;
 }
 
 aside {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: 0;
   left: 0;
-  background: hsla(var(--hue, 0), 100%, 50%, 0.5); /* Cambia el último valor a 0.5 para ver el filtro */
+  width: 100vw;
+  height: 100vh;
+  background: hsla(var(--hue, 0), 100%, 50%, 0.5);
   mix-blend-mode: multiply;
   z-index: 2;
   pointer-events: none;
@@ -123,6 +126,7 @@ button {
 
 section {
   position: relative;
-  /* Si quieres aplicar un filtro, descomenta esta línea */
-  /* filter: brightness(200%) saturate(50%); */
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
 }
