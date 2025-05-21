@@ -1,3 +1,7 @@
+:root {
+  --hue: 0;
+}
+
 video {
   position: relative;
   z-index: 1;
