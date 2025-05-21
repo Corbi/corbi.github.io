@@ -45,7 +45,7 @@ document.querySelector('aside')?.addEventListener('touchstart', e => {
 const options = Array.from(document.querySelectorAll('input[type=radio]'));
 
 options.forEach(option => {
-  option.addEventListener('click', e => {
+  option.addEventListener('change', e => {
     const hue = e.currentTarget.getAttribute('data-hue');
     if (hue) {
       document.documentElement.style.setProperty('--hue', hue);
