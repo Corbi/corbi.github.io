@@ -76,14 +76,6 @@ main label[for="blue"] {
   opacity: 1;
 }
 
-#green + label {
-  --hue-label: 120;
-}
-
-#blue + label {
-  --hue-label: 240;
-}
-
 /* Red (default) handled by default value in --hue-label (0) */
 
 input:checked + label {
